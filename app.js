@@ -1,12 +1,3 @@
-/**
- * 1) get players input
- * 2) get computers input
- * 3) compare
- * 4) announce winnner
- * 5) display running score
- * 6) announce match winner after a player = 5 
- */
-
 
 // initialize variables
 let playerTally = 0;
@@ -36,16 +27,25 @@ function playRound(playerSelection, computerSelection) {
     } else {
         result = `Tie! You both chose ${playerSelection}`;
     }
+    const controls = document.querySelector('.controls');
     const display = document.querySelector('.display');
-    display.textContent = `${result} Player Score: ${playerTally} Computer Score: ${computerTally}`;
+    const winner = document.querySelector('.winner');
+    const score = document.querySelector('.score');
+    const playagain = document.querySelector('.playagain');
+    winner.textContent = result;
+    score.textContent = `Player Score: ${playerTally} Computer Score: ${computerTally}`;
+    const gameover = document.createElement('div');
+    gameover.classList.add('gameover');
     if (playerTally === rounds) {
-        display.textContent += ` 
-        GAME OVER! You win!`;
-        return;
+        controls.classList.add('hidden');
+        gameover.textContent = 'GAME OVER! You win!';
+        display.appendChild(gameover);
+        playagain.classList.remove('hidden');
     } else if (computerTally === rounds) {
-        display.textContent += ` 
-        GAME OVER! Computer wins!`;
-        return;
+        controls.classList.add('hidden');
+        gameover.textContent = 'GAME OVER! You lose!';
+        display.appendChild(gameover);
+        playagain.classList.remove('hidden');
     }
 }
 
