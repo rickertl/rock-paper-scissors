@@ -1,53 +1,66 @@
+/**
+ * 1) get players input
+ * 2) get computers input
+ * 3) compare
+ * 4) announce winnner
+ * 5) display running score
+ * 6) announce match winner after a player = 5 
+ */
+
+
+// initialize variables
+let playerTally = 0;
+let computerTally = 0;
+let result = '';
+let rounds = 5;
+
 //gets computer's random play
 function computerPlay() {
-    const cPlays = ["Rock", "Paper", "Scissors"];
-    const cPlay = cPlays[Math.floor(Math.random() * cPlays.length)];
-    return cPlay;
+    const computerSelections = ["Rock", "Paper", "Scissors"];
+    const computerSelection = computerSelections[Math.floor(Math.random() * computerSelections.length)];
+    return computerSelection;
 }
 
-//gets player's inputted play
-function playerPlay() {
-    const pPlay = prompt("What's your play?").toLowerCase();
-    return pPlay.charAt(0).toUpperCase() + pPlay.slice(1);
-}
-
-//plays a round and determines winner or tie
-function playRound(playerSelection, computerSelection, playerTally, computerTally) {
-    let result;
+//plays a round and determines winner or tie...plus keeps score
+function playRound(playerSelection, computerSelection) {
     if ( (playerSelection == "Rock" && computerSelection == "Scissors") || 
     (playerSelection == "Scissors" && computerSelection == "Paper") || 
     (playerSelection == "Paper" && computerSelection == "Rock") ) {
-        result = "You Win! " + playerSelection + " beats " + computerSelection;
-        playerTally++;
+        result = `You Win! ${playerSelection} beats ${computerSelection}`;
+        ++playerTally;
     } else if ( (playerSelection == "Scissors" && computerSelection == "Rock") || 
     (playerSelection == "Paper" && computerSelection == "Scissors") || 
     (playerSelection == "Rock" && computerSelection == "Paper") ) {
-        result = "You Lose! " + computerSelection + " beats " + playerSelection;
-        computerTally++;
+        result = `You Lose! ${computerSelection} beats ${playerSelection}`;
+        ++computerTally;
     } else {
-        result = "Tie! You both chose " + playerSelection;
+        result = `Tie! You both chose ${playerSelection}`;
     }
-    return {result, playerTally, computerTally};
+    const display = document.querySelector('.display');
+    display.textContent = `${result} Player Score: ${playerTally} Computer Score: ${computerTally}`;
+    if (playerTally === rounds) {
+        display.textContent += ` 
+        GAME OVER! You win!`;
+        return;
+    } else if (computerTally === rounds) {
+        display.textContent += ` 
+        GAME OVER! Computer wins!`;
+        return;
+    }
 }
 
-//plays five rounds and keeps score
 function game() {
-    let playerTally = 0;
-    let computerTally = 0;
-    for (let i = 0; i < 5; i++) {
-        const computerSelection = computerPlay();
-        const playerSelection = playerPlay();
-        //console.log("Computer: " + computerSelection);
-        //console.log("Player: " + playerSelection);
-        let results = playRound(playerSelection, computerSelection, playerTally, computerTally);
-        let result = results.result;
-        playerTally = results.playerTally;
-        computerTally = results.computerTally;
-        console.log(result);
-        console.log("Player score: " + playerTally);
-        console.log("Computer score: " + computerTally);
-    }
-    console.log(`Game over!\n-Final Score-\nPlayer: ${playerTally}\nComputer: ${computerTally}`);
+        // query all player selection buttons
+        const buttons = document.querySelectorAll('button');
+        // loop through each button
+        buttons.forEach((button) => {
+            // and add a 'click' listener
+            button.addEventListener('click', () => {
+                const playerSelection = button.id;
+                const computerSelection = computerPlay();
+                playRound(playerSelection, computerSelection);
+            });
+        });
 }
 
 game();
