@@ -15,11 +15,26 @@ const playagain = document.querySelector('.playagain');
 const gameover = document.createElement('div');
 gameover.classList.add('gameover');
 
-//gets computer's random play
+// gets computer's random play
 function computerPlay() {
     const computerSelections = ["Rock", "Paper", "Scissors"];
     const computerSelection = computerSelections[Math.floor(Math.random() * computerSelections.length)];
     return computerSelection;
+}
+
+
+// game instructions
+function instructions() {
+    alert(`Play against the computer. First to five wins!
+
+• Rock beats Scissors
+• Paper beats Rock
+• Scissors beats Paper`);
+}
+
+// reset game
+function gameReset() {
+    window.location.reload();
 }
 
 //plays a round and determines winner or tie...plus keeps score
@@ -56,7 +71,7 @@ function playRound(playerSelection, computerSelection) {
 // initiates a full game
 function game() {
         // query all player selection buttons
-        const buttons = document.querySelectorAll('button');
+        const buttons = document.querySelectorAll('.controls > button');
         // loop through each button
         buttons.forEach((button) => {
             // and add a 'click' listener

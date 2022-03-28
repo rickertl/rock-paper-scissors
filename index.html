@@ -10,6 +10,7 @@
 </head>
 <body>
     <div id="container">
+        <button class="help" onClick="instructions()">?</button>
         <div class="controls">
             <button id="Rock">Rock</button>
             <button id="Paper">Paper</button>
@@ -22,7 +23,7 @@
                 <div class="computer-score"></div>
             </div>
         </div>
-        <button onClick="window.location.reload();" class="playagain hidden">Play Again?</button>
+        <button onClick="gameReset()" class="playagain hidden">Play Again?</button>
     </div>
 </body>
 </html>
