@@ -5,9 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
-    <style>
-        .hidden { display: none; }
-    </style>
+    <link rel="stylesheet" href="/style.css">
     <script src="/app.js" defer></script>
 </head>
 <body>
@@ -19,7 +17,10 @@
         </div>
         <div class="display">
             <div class="winner"></div>
-            <div class="score"></div>
+            <div class="score">
+                <div class="player-score"></div>
+                <div class="computer-score"></div>
+            </div>
         </div>
         <button onClick="window.location.reload();" class="playagain hidden">Play Again?</button>
     </div>

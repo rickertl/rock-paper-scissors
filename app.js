@@ -1,9 +1,19 @@
 
-// initialize variables
+// initialize algorithm variables
 let playerTally = 0;
 let computerTally = 0;
 let result = '';
 let rounds = 5;
+
+// initialize DOM variables
+const controls = document.querySelector('.controls');
+const display = document.querySelector('.display');
+const winner = document.querySelector('.winner');
+const playerScore = document.querySelector('.player-score');
+const computerScore = document.querySelector('.computer-score');
+const playagain = document.querySelector('.playagain');
+const gameover = document.createElement('div');
+gameover.classList.add('gameover');
 
 //gets computer's random play
 function computerPlay() {
@@ -17,25 +27,19 @@ function playRound(playerSelection, computerSelection) {
     if ( (playerSelection == "Rock" && computerSelection == "Scissors") || 
     (playerSelection == "Scissors" && computerSelection == "Paper") || 
     (playerSelection == "Paper" && computerSelection == "Rock") ) {
-        result = `You Win! ${playerSelection} beats ${computerSelection}`;
+        result = `You Win Round! ${playerSelection} beats ${computerSelection}`;
         ++playerTally;
     } else if ( (playerSelection == "Scissors" && computerSelection == "Rock") || 
     (playerSelection == "Paper" && computerSelection == "Scissors") || 
     (playerSelection == "Rock" && computerSelection == "Paper") ) {
-        result = `You Lose! ${computerSelection} beats ${playerSelection}`;
+        result = `You Lose Round! ${computerSelection} beats ${playerSelection}`;
         ++computerTally;
     } else {
         result = `Tie! You both chose ${playerSelection}`;
     }
-    const controls = document.querySelector('.controls');
-    const display = document.querySelector('.display');
-    const winner = document.querySelector('.winner');
-    const score = document.querySelector('.score');
-    const playagain = document.querySelector('.playagain');
     winner.textContent = result;
-    score.textContent = `Player Score: ${playerTally} Computer Score: ${computerTally}`;
-    const gameover = document.createElement('div');
-    gameover.classList.add('gameover');
+    playerScore.textContent = `Player Score: ${playerTally}`;
+    computerScore.textContent = `Computer Score: ${computerTally}`;
     if (playerTally === rounds) {
         controls.classList.add('hidden');
         gameover.textContent = 'GAME OVER! You win!';
@@ -49,6 +53,7 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+// initiates a full game
 function game() {
         // query all player selection buttons
         const buttons = document.querySelectorAll('button');

@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500&display=swap");
+body {
+  background-color: slategray;
+  font-family: "Fredoka", sans-serif;
+}
+.hidden {
+  display: none !important;
+}
+button {
+  padding: 5px 10px;
+}
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+.display {
+  text-align: center;
+}
+.winner,
+.gameover {
+  margin: 20px 0;
+}
+button.playagain {
+  display: block;
+  margin: 0 auto;
+}
